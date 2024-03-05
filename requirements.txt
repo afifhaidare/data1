@@ -6,4 +6,3 @@ pandas-datareader
 prophet
 matplotlib
 matplotlib-inline
-matplotlib.pyplot
