@@ -4,5 +4,6 @@ streamlit
 yfinance
 pandas-datareader
 prophet
-mathplotlib
+matplotlib
 matplotlib-inline
+matplotlib.pyplot
