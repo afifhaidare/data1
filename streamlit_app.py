@@ -3,13 +3,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Function to load data (adjust the path as needed)
 @st.cache
 def load_data():
-    data = pd.read_csv('bike_rentals.csv')  # Make sure to use your actual data file path
+    data = pd.read_csv('hour.csv')
     return data
 
-# Function to plot hourly counts
 def plot_hourly_counts(data):
     hourly_counts = data.groupby('hr')['cnt'].mean()
     colors = ['red' if hour in [6, 7, 8, 9, 17, 18, 19] else 'lightgreen' for hour in hourly_counts.index]
