@@ -1,11 +1,12 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # Import seaborn for better-looking plots
 
 # Function to load data (adjust the path as needed)
 @st.cache
 def load_data():
-    data = pd.read_csv('hour.csv')  # Make sure to use your actual data file path
+    data = pd.read_csv('bike_rentals.csv')  # Make sure to use your actual data file path
     return data
 
 # Function to plot hourly counts
@@ -19,6 +20,25 @@ def plot_hourly_counts(data):
     plt.xticks(rotation=0)
     st.pyplot(plt)
 
+# Function to plot scatter plots
+def plot_scatter_plots(data):
+    # Temperature vs. Count
+    plt.figure(figsize=(12, 6))
+    plt.subplot(1, 2, 1)  # 1 row, 2 columns, 1st subplot
+    sns.regplot(x='temp', y='cnt', data=data, scatter_kws={'alpha':0.5}, line_kws={'color': 'red'})
+    plt.title('Temperature vs. Bike Rental Count')
+    plt.xlabel('Normalized Temperature')
+    plt.ylabel('Rental Count')
+
+    # Windspeed vs. Count
+    plt.subplot(1, 2, 2)  # 1 row, 2 columns, 2nd subplot
+    sns.regplot(x='windspeed', y='cnt', data=data, scatter_kws={'alpha':0.5}, line_kws={'color': 'blue'})
+    plt.title('Windspeed vs. Bike Rental Count')
+    plt.xlabel('Normalized Windspeed')
+    plt.ylabel('Rental Count')
+
+    st.pyplot(plt)
+
 # Streamlit UI
 def main():
     st.title('Bike Rental Data Visualization')
@@ -30,6 +50,9 @@ def main():
 
     st.subheader('Average Bike Rentals per Hour')
     plot_hourly_counts(data)
+
+    st.subheader('Temperature and Windspeed vs. Bike Rental Count')
+    plot_scatter_plots(data)
 
 if __name__ == "__main__":
     main()
