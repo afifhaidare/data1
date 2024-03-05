@@ -6,3 +6,4 @@ pandas-datareader
 prophet
 matplotlib
 matplotlib-inline
+seaborn
